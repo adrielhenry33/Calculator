@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'logger.dart';
 
 void main() => (runApp(Calculator()));
 
 class Calculator extends StatelessWidget {
   const Calculator({super.key});
 
-  void _buttoPressed(String text){
-      print('Botão pressionado: $text');
-
+  void _buttonPressed(String text) {
+    Logger.info('Botão pressionado: $text');
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,22 +39,159 @@ class Calculator extends StatelessWidget {
                 ),
               ),
             ),
-
-            Container(
-              child: Column(
+            
+              Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CalcButton(
                         text: 'C', 
                         color: Colors.black, 
+                        textColor: Colors.blue,
                         onPressed: () => _buttonPressed('1'),
+                      ),
+                      CalcButton(
+                        text: 'DEL', 
+                        textColor: Colors.blue,
+                        color: Colors.black, 
+                        onPressed: () => _buttonPressed('DEL'),
+                      ),
+
+                      CalcButton(
+                        text: '%', 
+                        color: Colors.black, 
+                        textColor: Colors.blue,
+                        onPressed: () => _buttonPressed('%'),
+                      ),
+
+                      CalcButton(
+                        text: '/', 
+                        color: Colors.black, 
+                        textColor: Colors.blue,
+                        onPressed: () => _buttonPressed('/'),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                       CalcButton(
+                        text: '7', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('7'),
+                      ),
+                      CalcButton(
+                        text: '8', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('8'),
+                      ),
+
+                      CalcButton(
+                        text: '9', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('9'),
+                      ),
+
+                      CalcButton(
+                        text: '*', 
+                        textColor: Colors.blue,
+                        color: Colors.black, 
+                        onPressed: () => _buttonPressed('*'),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                       CalcButton(
+                        text: '4', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('4'),
+                      ),
+                      CalcButton(
+                        text: '8', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('5'),
+                      ),
+
+                      CalcButton(
+                        text: '9', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('6'),
+                      ),
+
+                      CalcButton(
+                        text: '*', 
+                        textColor: Colors.blue,
+                        color: Colors.black, 
+                        onPressed: () => _buttonPressed('+'),
+                      ),
+                    ],
+                  ),
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                       CalcButton(
+                        text: '1', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('1'),
+                      ),
+                      CalcButton(
+                        text: '2', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('2'),
+                      ),
+
+                      CalcButton(
+                        text: '3', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('3'),
+                      ),
+
+                      CalcButton(
+                        text: '-', 
+                        textColor: Colors.blue,
+                        color: Colors.black, 
+                        onPressed: () => _buttonPressed('-'),
+                      ),
+                    ],
+                  ),
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                       CalcButton(
+                        text: '0', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('4'),
+                      ),
+                      CalcButton(
+                        text: '.', 
+                        color: Colors.black, 
+                        textColor: Colors.white,
+                        onPressed: () => _buttonPressed('.'),
+                      ),
+
+                      CalcButton(
+                        text: '=', 
+                        textColor: Colors.blue,
+                        color: Colors.black, 
+                        onPressed: () => _buttonPressed('='),
                       ),
                     ],
                   ),
                 ],
-              ),
-            ),
+              )
           ],
         ),
       ),
@@ -66,35 +203,33 @@ class CalcButton extends StatelessWidget {
   final String text;
   final Color color;
   final VoidCallback onPressed;
+  final Color textColor;
 
   const CalcButton({
     Key? key,
     required this.text,
     required this.color,
     required this.onPressed,
+    required this.textColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-      child: Padding(
+    return 
+
+       Padding(
         padding: const EdgeInsets.all(4.0),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: color,
             padding: const EdgeInsets.all(24.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
           ),
           onPressed: onPressed,
           child: Text(
             text,
-            style: const TextStyle(fontSize: 24, color: Colors.blue),
+            style: TextStyle(fontSize: 24, color: textColor),
           ),
         ),
-      ),
-    );
+      );
   }
 }
