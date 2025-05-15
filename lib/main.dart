@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'logger.dart';
-
+import 'Components/button.dart';
 void main() => (runApp(Calculator()));
 
 class Calculator extends StatelessWidget {
@@ -196,40 +196,5 @@ class Calculator extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class CalcButton extends StatelessWidget {
-  final String text;
-  final Color color;
-  final VoidCallback onPressed;
-  final Color textColor;
-
-  const CalcButton({
-    Key? key,
-    required this.text,
-    required this.color,
-    required this.onPressed,
-    required this.textColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return 
-
-       Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: color,
-            padding: const EdgeInsets.all(24.0),
-          ),
-          onPressed: onPressed,
-          child: Text(
-            text,
-            style: TextStyle(fontSize: 24, color: textColor),
-          ),
-        ),
-      );
   }
 }
