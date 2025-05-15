@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
+
 void main() => (runApp(Calculator()));
 
 class Calculator extends StatelessWidget {
   const Calculator({super.key});
 
+  void _buttoPressed(String text){
+      print('Botão pressionado: $text');
+
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,25 +39,22 @@ class Calculator extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             Container(
               child: Column(
                 children: [
                   Row(
                     children: [
-                      TextButton(
-                        style: ButtonStyle(
-                           
-                        ),
-                        onPressed: () {}, 
-                        child: Text('C')
+                      CalcButton(
+                        text: 'C', 
+                        color: Colors.black, 
+                        onPressed: () => _buttonPressed('1'),
                       ),
                     ],
-                  ), 
-                  Row(),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -62,16 +64,37 @@ class Calculator extends StatelessWidget {
 
 class CalcButton extends StatelessWidget {
   final String text;
-  final String color;
+  final Color color;
   final VoidCallback onPressed;
-  
-  const CalcButton({super.key});
 
- 
-  
+  const CalcButton({
+    Key? key,
+    required this.text,
+    required this.color,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: color,
+            padding: const EdgeInsets.all(24.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+          onPressed: onPressed,
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 24, color: Colors.blue),
+          ),
+        ),
+      ),
+    );
   }
 }
